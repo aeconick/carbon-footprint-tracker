@@ -1,6 +1,7 @@
 import { Header } from "./components/Header";
 import { Home } from "./components/Home";
 import { Login } from "./components/Login";
+import { Register } from "./components/Register";
 
 
 function App() {
@@ -10,7 +11,8 @@ function App() {
 
       <main id="main-content">
         {/* <Home /> */}
-        <Login />
+        {/* <Login /> */}
+        <Register />
       </main>
 
     </div>
