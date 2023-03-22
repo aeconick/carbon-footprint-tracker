@@ -1,3 +1,4 @@
+import { CreateLog } from "./components/CreateLog";
 import { Header } from "./components/Header";
 import { Home } from "./components/Home";
 import { Login } from "./components/Login";
@@ -12,7 +13,8 @@ function App() {
       <main id="main-content">
         {/* <Home /> */}
         {/* <Login /> */}
-        <Register />
+        {/* <Register /> */}
+        <CreateLog />
       </main>
 
     </div>
