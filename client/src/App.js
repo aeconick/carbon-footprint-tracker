@@ -1,3 +1,4 @@
+import { Catalog } from "./components/Catalog";
 import { CreateLog } from "./components/CreateLog";
 import { Header } from "./components/Header";
 import { Home } from "./components/Home";
@@ -14,7 +15,8 @@ function App() {
         {/* <Home /> */}
         {/* <Login /> */}
         {/* <Register /> */}
-        <CreateLog />
+        {/* <CreateLog /> */}
+        <Catalog />
       </main>
 
     </div>
