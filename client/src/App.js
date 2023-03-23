@@ -1,3 +1,5 @@
+import { Routes,Route } from 'react-router-dom';
+
 import { Catalog } from "./components/Catalog";
 import { CreateLog } from "./components/CreateLog";
 import { Header } from "./components/Header";
@@ -12,11 +14,13 @@ function App() {
       <Header />
 
       <main id="main-content">
-        <Home />
-        {/* <Login /> */}
-        {/* <Register /> */}
-        {/* <CreateLog /> */}
-        {/* <Catalog /> */}
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/create-log' element={<CreateLog />} />
+          <Route path='/catalog' element={<Catalog />} />
+        </Routes>
       </main>
 
     </div>

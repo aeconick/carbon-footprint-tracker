@@ -1,20 +1,22 @@
+import { Link } from 'react-router-dom'
+
 import './Header.css';
 
 export const Header = () => {
     return (
         <header>
-            <h1><a className="home" href="#">CarbonTracker</a></h1>
+            <h1><Link className="home" to="/">CarbonTracker</Link></h1>
             <nav>
-                <a href="#">All logs</a>
+                <Link to="/catalog">All logs</Link>
                 {/* Logged */}
                 <div id="user">
-                    <a href="#">Log Emission</a>
-                    <a href="#">Logout</a>
+                    <Link to="/create-log">Log Emission</Link>
+                    <Link to="/logout">Logout</Link>
                 </div>
                 {/* Guest */}
                 <div id="guest">
-                    <a href="#">Login</a>
-                    <a href="#">Register</a>
+                    <Link to="/login">Login</Link>
+                    <Link to="/register">Register</Link>
                 </div>
             </nav>
         </header>
