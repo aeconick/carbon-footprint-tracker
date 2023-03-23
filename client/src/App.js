@@ -12,11 +12,11 @@ function App() {
       <Header />
 
       <main id="main-content">
-        {/* <Home /> */}
+        <Home />
         {/* <Login /> */}
         {/* <Register /> */}
         {/* <CreateLog /> */}
-        <Catalog />
+        {/* <Catalog /> */}
       </main>
 
     </div>

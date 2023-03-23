@@ -1,7 +1,7 @@
 export const Header = () => {
     return (
         <header>
-            <h1><a class="home" href="#">CarbonTracker</a></h1>
+            <h1><a className="home" href="#">CarbonTracker</a></h1>
             <nav>
                 <a href="#">All logs</a>
                 {/* Logged */}
