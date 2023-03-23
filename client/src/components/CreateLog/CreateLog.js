@@ -1,3 +1,5 @@
+import './CreateLog.css';
+
 export const CreateLog = () => {
     return (
         <section id="create-page" className="auth">
