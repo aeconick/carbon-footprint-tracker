@@ -18,7 +18,7 @@ export const Home = () => {
                         <img src="/images/greta.jpg" />
                     </div>
                     <h3>Greta Thunberg</h3>
-                    <div class="quotes">
+                    <div className="quotes">
                         <span>lqlqlql</span>
                     </div>
                     <div className="data-buttons">
@@ -31,7 +31,7 @@ export const Home = () => {
                         <img src="/images/leonardo.jpg" />
                     </div>
                     <h3>Leonardo Dicaprio</h3>
-                    <div class="quotes">
+                    <div className="quotes">
                         <span>lqlqlqlq</span>
                     </div>
                     <div className="data-buttons">
@@ -44,7 +44,7 @@ export const Home = () => {
                         <img src="/images/shailene.jpg" />
                     </div>
                     <h3>Shailene Woodley</h3>
-                    <div class="quotes">
+                    <div className="quotes">
                         <span>lqlqlq</span>
                     </div>
                     <div className="data-buttons">
