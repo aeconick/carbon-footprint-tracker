@@ -75,7 +75,7 @@
     box-shadow: 0px 0px 30px 0px;
     margin-top: 20px;
     padding: 50px;
-    margin-left: 70px;
+    margin-left: 120px;
     background-position: right 35% bottom 45%;
     box-sizing: border-box;
     border-radius: 15px;
@@ -99,7 +99,7 @@
 }
 
 .log>h3 {
-    color: #86c739;
+    color: #4a4e45;
     font-family: "Agency FB";
     font-size: 42px;
     font-weight: 700;
@@ -120,30 +120,24 @@
     line-height: normal;
 }
 
-.rating {
+.quotes {
     unicode-bidi: bidi-override;
     text-align: center;
     direction: rtl;
 }
 
-.rating span {
-    font-size: 40px;
+.quotes span {
+    font-size: 25px;
     padding: 4px;
 }
 
-.rating span:before {
-    content: "\2605";
-    position: absolute;
-    color: gold;
-}
-
 .details-btn {
-    background-color: #649a42;
-    font-size: 1.4rem;
+    background-color: #4a4e45cc;
+    font-size: 1rem;
     padding-top: 20px;
     margin-top: 10px;
     color: white;
-    padding: 0.9em 1.4em;
+    padding: 0.8em 1.4em;
 }
 
 .data-buttons {
@@ -153,12 +147,12 @@
 }
 
 .btn.details-btn:hover {
-    background-color: rgba(100, 154, 66, 0.428);
+    background-color: rgba(74, 78, 69, 0.234);
     color: white;
 }
 
 #home-page>h1 {
-    color: #86c739;
+    color: #4a4e45;
     text-align: center;
     font-weight: 700;
     font-size: 84px;
