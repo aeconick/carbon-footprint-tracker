@@ -1,4 +1,7 @@
-import { Routes,Route } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
+
+import * as logService from './services/logService';
 
 import { Catalog } from "./components/Catalog";
 import { CreateLog } from "./components/CreateLog";
@@ -10,6 +13,15 @@ import { Register } from "./components/Register";
 
 
 function App() {
+  const [logs, setLogs] = useState([]);
+
+  useEffect(() => {
+    logService.getAll()
+      .then(result => {
+        setLogs(result)
+      })
+  }, []);
+
   return (
     <div id="box">
       <Header />
@@ -20,7 +32,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path='/create-log' element={<CreateLog />} />
-          <Route path='/catalog' element={<Catalog />} />
+          <Route path='/catalog' element={<Catalog logs={logs} />} />
         </Routes>
       </main>
 
