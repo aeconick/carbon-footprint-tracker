@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate, } from 'react-router-dom';
 
 import * as logService from './services/logService';
 
@@ -13,6 +13,7 @@ import { Register } from "./components/Register";
 
 
 function App() {
+  const navigate = useNavigate();
   const [logs, setLogs] = useState([]);
 
   useEffect(() => {
@@ -21,6 +22,14 @@ function App() {
         setLogs(result)
       })
   }, []);
+
+  const onCreateLogSubmit = async (data) => {
+    const newLog = logService.create(data);
+
+    setLogs(state => [...state, newLog]);
+
+    navigate('/catalog');
+  }
 
   return (
     <div id="box">
@@ -31,7 +40,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
-          <Route path='/create-log' element={<CreateLog />} />
+          <Route path='/create-log' element={<CreateLog onCrateLogSubmit={onCreateLogSubmit} />} />
           <Route path='/catalog' element={<Catalog logs={logs} />} />
         </Routes>
       </main>

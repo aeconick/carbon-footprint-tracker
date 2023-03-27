@@ -8,3 +8,11 @@ export const getAll = async () => {
 
     return logs;
 };
+
+export const create = async (logData) => {
+    const result = await request.post(baseUrl, logData);
+
+    console.log(result);
+
+    return result;
+}
