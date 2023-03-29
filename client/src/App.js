@@ -24,7 +24,7 @@ function App() {
   }, []);
 
   const onCreateLogSubmit = async (data) => {
-    const newLog = logService.create(data);
+    const newLog = await logService.create(data);
 
     setLogs(state => [...state, newLog]);
 
