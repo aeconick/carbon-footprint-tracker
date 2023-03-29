@@ -7,23 +7,35 @@ import * as logService from '../../services/logService';
 import * as commentService from '../../services/commentService';
 
 export const LogDetails = () => {
-    const { logId } = useParams();
-    const [log, setLog] = useState([]);
     const [username, setUsername] = useState('');
     const [comment, setComment] = useState('');
+    //const [comments, setComments] = useState([]);
+    const { logId } = useParams();
+    const [log, setLog] = useState([]);
 
+    //TODO: not the best implementation (DONT MIX SERVICES)
     useEffect(() => {
         logService.getOne(logId)
             .then(result => {
-                console.log(result);
                 setLog(result);
-            });
+                // return commentService.getAll(logId);
+            }) //promise chaining
+            // .then(result => {
+            //     setComments(result);
+            // });
     }, [logId]);
 
     const onCommentSubmit = async (e) => {
         e.preventDefault();
 
-        await commentService.create({
+        // await commentService.create({
+        //     logId,
+        //     username,
+        //     comment,
+        // });
+
+        //TODO: remove later, works for jsonstore only
+        await logService.addComment(logId,{
             logId,
             username,
             comment,
@@ -42,7 +54,7 @@ export const LogDetails = () => {
                 <div className="log-header">
                     <img className="log-img" src={log.imageUrl} />
                     <h1>{log.title}</h1>
-                    <span className="levels">Emissions: {log.emissions}</span>
+                    <span className="emissions">Emissions: {log.emissions}</span>
                     <p className="type">{log.category}</p>
                 </div>
 
@@ -52,16 +64,28 @@ export const LogDetails = () => {
                 <div className="details-comments">
                     <h2>Comments:</h2>
                     <ul>
-                        {/* list all comments for current log (If any) */}
-                        <li className="comment">
-                            <p>Don't eat.</p>
-                        </li>
-                        <li className="comment">
-                            <p>Content: lqlqlqlq</p>
-                        </li>
+                        {/* {comments.map(x => {
+                            (
+                                <li key={x._id} className="comment">
+                                    <p>{`${x.username} ${x.comment}`}</p>
+                                </li>
+                            )
+                        })} */}
+                        {console.log(log.comments)}
+                        {log.comments && Object.values(log.comments).map(x =>
+                            (
+                                <li key={x._id} className="comment">
+                                    <p>{`${x.username}: ${x.comment}`}</p>
+                                </li>
+                            )
+                        )}
+
                     </ul>
-                    {/* Display paragraph: If there are no logs in the database */}
-                    <p className="no-comment">No comments.</p>
+
+                    {/* {comments.length === 0 && (
+                        <p className="no-comment">No comments.</p>
+                    )} */}
+
                 </div>
 
                 {/* edit/delete */}

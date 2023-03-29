@@ -47,13 +47,13 @@
     font-weight: 400;
 }
 
-.levels {
+.emissions {
     display: inline-block;
     margin-top: 15px;
     color: #555;
     padding: 7px;
     border-radius: 5px;
-    background-color: #b4b6ee;
+    background-color: #ecaeae;
     border: 1px solid rgba(218, 181, 181, 0.829);
 }
 
@@ -91,16 +91,61 @@
     color: #545454;
 }
 
-.movie_social {
-    height: 10%;
-    padding-left: 15px;
-    padding-bottom: 20px;
+.create-comment>.form>textarea {
+    resize: none;
+    width: 100px;
+    height: 100px;
+    margin-top: 22px;
+    margin-bottom: 28px;
+    padding: 5px;
 }
 
-.movie_social {
-    font-size: 1.6rem;
-    padding-top: 20px;
+.details-comments {
+    display: table-cell;
+}
+
+.create-comment {
+    margin-top: 60px;
+    position: relative;
     text-align: center;
+    width: 700px;
+    height: auto;
+    border-radius: 20px;
+    padding: 40px;
+    box-sizing: border-box;
+    background: #515d58;
+    box-shadow: 0px 0px 32px 0px #32485e, -14px -14px 20px #191c21;
+}
+
+.create-comment>label {
+    color: white;
+    font-size: 28px;
+    text-align: center;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.info-section>.details-comments li {
+    width: 400px;
+    display: inline-block;
+    position: static;
+    margin: 20px auto 25px auto;
+    box-shadow: 8px 8px 8px 0 rgba(0, 0, 0, 0.2), 12px 12px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 16px;
+    margin-left: 60px;
+    background: #515d58;
+    color: white;
+}
+
+.comment p {
+    padding: 16px;
+}
+
+
+.create-comment>.button:hover {
+    background-color: #41425c;
+    color: white;
+    cursor: pointer;
 }
 
 .buttons {
@@ -112,7 +157,7 @@
 
 .button {
     height: 15%;
-    background-color: #54557b;
+    background-color: #778e9c;
     padding: 14px;
     margin-top: auto;
     font-size: 21px;
@@ -123,4 +168,3 @@
     background-color: #6f5d9c;
     color: white;
 }
-

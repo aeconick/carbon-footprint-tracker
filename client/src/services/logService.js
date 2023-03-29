@@ -20,3 +20,10 @@ export const create = async (logData) => {
 
     return result;
 }
+
+//TODO: delete later, only work for jsonstore
+export const addComment = async (logId,data) => {
+    const result = await request.post(`${baseUrl}/${logId}/comments`,data);
+
+    return result;
+}
