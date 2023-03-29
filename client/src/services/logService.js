@@ -9,10 +9,14 @@ export const getAll = async () => {
     return logs;
 };
 
+export const getOne = async (logId) => {
+    const result = await request.get(`${baseUrl}/${logId}`);
+
+    return result;
+};
+
 export const create = async (logData) => {
     const result = await request.post(baseUrl, logData);
-
-    console.log(result);
 
     return result;
 }

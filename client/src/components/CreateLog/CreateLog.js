@@ -2,6 +2,8 @@ import { useState } from 'react';
 
 import './CreateLog.css';
 
+//TODO: fix emissions bug
+
 
 export const CreateLog = ({
     onCrateLogSubmit,
