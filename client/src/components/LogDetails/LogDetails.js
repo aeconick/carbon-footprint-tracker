@@ -4,11 +4,13 @@ import { useParams } from 'react-router-dom';
 import './LogDetails.css';
 
 import * as logService from '../../services/logService';
-
+import * as commentService from '../../services/commentService';
 
 export const LogDetails = () => {
     const { logId } = useParams();
     const [log, setLog] = useState([]);
+    const [username, setUsername] = useState('');
+    const [comment, setComment] = useState('');
 
     useEffect(() => {
         logService.getOne(logId)
@@ -17,6 +19,20 @@ export const LogDetails = () => {
                 setLog(result);
             });
     }, [logId]);
+
+    const onCommentSubmit = async (e) => {
+        e.preventDefault();
+
+        await commentService.create({
+            logId,
+            username,
+            comment,
+        });
+
+        setUsername('');
+        setComment('');
+
+    };
 
     return (
         <section id="log-details">
@@ -58,8 +74,10 @@ export const LogDetails = () => {
             {/* comments */}
             <article className="create-comment">
                 <label>Add new comment:</label>
-                <form className="form">
-                    <textarea name="comment" placeholder="Write your comment here..."></textarea>
+                <form className="form" onSubmit={onCommentSubmit}>
+                    {/* TODO: change onChange on username and comment to not be inline */}
+                    <input type="text" name="username" placeholder="Nikolay" value={username} onChange={(e) => setUsername(e.target.value)} />
+                    <textarea name="comment" placeholder="Write your comment here..." value={comment} onChange={(e) => setComment(e.target.value)}></textarea>
                     <input className="btn submit" type="submit" value="Add Comment" />
                 </form>
             </article>
