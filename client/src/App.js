@@ -10,6 +10,7 @@ import { Header } from "./components/Header";
 import { Home } from "./components/Home";
 import { Login } from "./components/Login";
 import { Register } from "./components/Register";
+import { LogDetails } from './components/LogDetails';
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
           <Route path='/register' element={<Register />} />
           <Route path='/create-log' element={<CreateLog onCrateLogSubmit={onCreateLogSubmit} />} />
           <Route path='/catalog' element={<Catalog logs={logs} />} />
+          <Route path='/catalog/:logId' element={<LogDetails />} />
         </Routes>
       </main>
 
