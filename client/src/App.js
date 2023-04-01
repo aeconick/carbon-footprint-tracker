@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, } from 'react-router-dom';
 
 import * as logService from './services/logService';
+import { AuthContext } from './contexts/AuthContext';
 
 import { Catalog } from "./components/Catalog";
 import { CreateLog } from "./components/CreateLog";
@@ -16,6 +17,7 @@ import { LogDetails } from './components/LogDetails';
 function App() {
   const navigate = useNavigate();
   const [logs, setLogs] = useState([]);
+  const [auth, setAuth] = useState({});
 
   useEffect(() => {
     logService.getAll()
@@ -32,24 +34,30 @@ function App() {
     navigate('/catalog');
   }
 
+  const onLoginSubmit = async (data) => {
+    console.log(data);
+  }
+
   return (
-    <div id="box">
-      <Header />
+    <AuthContext.Provider value={{ onLoginSubmit }}>
+      <div id="box">
+        <Header />
 
-      <main id="main-content">
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/create-log' element={<CreateLog onCrateLogSubmit={onCreateLogSubmit} />} />
-          <Route path='/catalog' element={<Catalog logs={logs} />} />
-          <Route path='/catalog/:logId' element={<LogDetails />} />
-        </Routes>
-      </main>
+        <main id="main-content">
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
+            <Route path='/create-log' element={<CreateLog onCrateLogSubmit={onCreateLogSubmit} />} />
+            <Route path='/catalog' element={<Catalog logs={logs} />} />
+            <Route path='/catalog/:logId' element={<LogDetails />} />
+          </Routes>
+        </main>
 
-      <Footer />
+        <Footer />
 
-    </div>
+      </div>
+    </AuthContext.Provider>
   );
 }
 
