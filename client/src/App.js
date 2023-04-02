@@ -13,6 +13,7 @@ import { Home } from "./components/Home";
 import { Login } from "./components/Login";
 import { Register } from "./components/Register";
 import { LogDetails } from './components/LogDetails';
+import { Logout } from './components/Logout';
 
 
 function App() {
@@ -65,9 +66,16 @@ function App() {
     }
   }
 
+  const onLogout = async () => {
+    //await authService.logout();
+
+    setAuth({});
+  }
+
   const context = {
     onLoginSubmit,
     onRegisterSubmit,
+    onLogout,
     userId: auth._id,
     token: auth.accessToken,
     userEmail: auth.email,
@@ -83,6 +91,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
+            <Route path='/logout' element={<Logout />} />
             <Route path='/register' element={<Register />} />
             <Route path='/create-log' element={<CreateLog onCrateLogSubmit={onCreateLogSubmit} />} />
             <Route path='/catalog' element={<Catalog logs={logs} />} />
