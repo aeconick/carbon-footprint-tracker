@@ -1,29 +1,40 @@
-import * as request from './requester';
+import { requestFactory } from './requester';
 
-const baseUrl = 'http://localhost:3030/jsonstore/logs'
+const baseUrl = 'http://localhost:3030/data/logs'
 
-export const getAll = async () => {
-    const result = await request.get(baseUrl);
-    const logs = Object.values(result);
+export const logServiceFactory = (token) => {
+    const request = requestFactory(token);
 
-    return logs;
-};
+    const getAll = async () => {
+        const result = await request.get(baseUrl);
+        const logs = Object.values(result);
 
-export const getOne = async (logId) => {
-    const result = await request.get(`${baseUrl}/${logId}`);
+        return logs;
+    };
 
-    return result;
-};
+    const getOne = async (logId) => {
+        const result = await request.get(`${baseUrl}/${logId}`);
 
-export const create = async (logData) => {
-    const result = await request.post(baseUrl, logData);
+        return result;
+    };
 
-    return result;
-}
+    const create = async (logData) => {
+        const result = await request.post(baseUrl, logData);
 
-//TODO: delete later, only work for jsonstore
-export const addComment = async (logId,data) => {
-    const result = await request.post(`${baseUrl}/${logId}/comments`,data);
+        return result;
+    }
 
-    return result;
+    //TODO: delete later, only work for jsonstore
+    const addComment = async (logId, data) => {
+        const result = await request.post(`${baseUrl}/${logId}/comments`, data);
+
+        return result;
+    }
+
+    return {
+        getAll,
+        getOne,
+        create,
+        addComment,
+    }
 }

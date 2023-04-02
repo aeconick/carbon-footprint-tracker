@@ -3,7 +3,8 @@ import { useParams } from 'react-router-dom';
 
 import './LogDetails.css';
 
-import * as logService from '../../services/logService';
+import {logServiceFactory} from '../../services/logService';
+import { useService } from '../../hooks/useService';
 import * as commentService from '../../services/commentService';
 
 export const LogDetails = () => {
@@ -12,6 +13,7 @@ export const LogDetails = () => {
     //const [comments, setComments] = useState([]);
     const { logId } = useParams();
     const [log, setLog] = useState([]);
+    const logService = useService(logServiceFactory);
 
     //TODO: not the best implementation (DONT MIX SERVICES)
     useEffect(() => {

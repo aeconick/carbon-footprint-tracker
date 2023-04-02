@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, } from 'react-router-dom';
 
-import * as logService from './services/logService';
-import * as authService from './services/authService';
+import { logServiceFactory } from './services/logService';
+import { authServiceFactory } from './services/authService';
 import { AuthContext } from './contexts/AuthContext';
+import { useService } from './hooks/useService';
 
 import { Catalog } from "./components/Catalog";
 import { CreateLog } from "./components/CreateLog";
@@ -20,6 +21,8 @@ function App() {
   const navigate = useNavigate();
   const [logs, setLogs] = useState([]);
   const [auth, setAuth] = useState({});
+  const logService = logServiceFactory(auth.accessToken);
+  const authService = authServiceFactory(auth.accessToken);
 
   useEffect(() => {
     logService.getAll()
@@ -67,7 +70,7 @@ function App() {
   }
 
   const onLogout = async () => {
-    //await authService.logout();
+    await authService.logout();
 
     setAuth({});
   }
