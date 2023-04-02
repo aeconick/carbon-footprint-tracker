@@ -53,7 +53,8 @@ function App() {
     userId: auth._id,
     token: auth.accessToken,
     userEmail: auth.email,
-  }
+    isAuthenticated: !!auth.accessToken, //truthy => true, falsy => false
+  };
 
   return (
     <AuthContext.Provider value={context}>
