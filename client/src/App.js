@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, } from 'react-router-dom';
 
 import * as logService from './services/logService';
+import * as authService from './services/authService';
 import { AuthContext } from './contexts/AuthContext';
 
 import { Catalog } from "./components/Catalog";
@@ -34,12 +35,28 @@ function App() {
     navigate('/catalog');
   }
 
+  //TODO: notify user if there is an error
   const onLoginSubmit = async (data) => {
-    console.log(data);
+    try {
+      const result = await authService.login(data);
+
+      setAuth(result);
+
+      navigate('/catalog');
+    } catch (error) {
+      console.log('error');
+    }
+  }
+
+  const context = {
+    onLoginSubmit,
+    userId: auth._id,
+    token: auth.accessToken,
+    userEmail: auth.email,
   }
 
   return (
-    <AuthContext.Provider value={{ onLoginSubmit }}>
+    <AuthContext.Provider value={context}>
       <div id="box">
         <Header />
 
