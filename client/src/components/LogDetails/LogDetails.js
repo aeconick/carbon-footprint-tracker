@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
-import { useParams,useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 
 import './LogDetails.css';
 
@@ -55,7 +55,7 @@ export const LogDetails = () => {
 
     const onDeleteClick = async () => {
         logService.del(log._id);
-//TODO: delete from state
+        //TODO: delete from state
         navigate('/catalog');
     }
 
@@ -84,7 +84,7 @@ export const LogDetails = () => {
                                 </li>
                             )
                         })} */}
-                        {console.log(log.comments)}
+
                         {log.comments && Object.values(log.comments).map(x =>
                         (
                             <li key={x._id} className="comment">
@@ -104,7 +104,7 @@ export const LogDetails = () => {
                 {/* edit/delete */}
                 {isOwner && (
                     <div className="buttons">
-                        <a href="#" className="button">Edit</a>
+                        <Link to={`/catalog/${log._id}/edit`} className="button">Edit</Link>
                         <a className="button" onClick={onDeleteClick}>Delete</a>
                     </div>
                 )}

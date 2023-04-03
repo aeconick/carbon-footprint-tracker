@@ -15,6 +15,7 @@ import { Login } from "./components/Login";
 import { Register } from "./components/Register";
 import { LogDetails } from './components/LogDetails';
 import { Logout } from './components/Logout';
+import { EditLog } from './components/EditLog/EditLog';
 
 
 function App() {
@@ -75,6 +76,14 @@ function App() {
     setAuth({});
   }
 
+  const onLogEditSubmit = async (values) => {
+    const result = await logService.edit(values._id, values);
+
+    setLogs(state => state.map(x => x._id === values._id ? result : x));
+
+    navigate(`catalog/${values._id}`);
+  }
+
   const context = {
     onLoginSubmit,
     onRegisterSubmit,
@@ -99,6 +108,7 @@ function App() {
             <Route path='/create-log' element={<CreateLog onCrateLogSubmit={onCreateLogSubmit} />} />
             <Route path='/catalog' element={<Catalog logs={logs} />} />
             <Route path='/catalog/:logId' element={<LogDetails />} />
+            <Route path='/catalog/:logId/edit' element={<EditLog onLogEditSubmit={onLogEditSubmit} />} />
           </Routes>
         </main>
 

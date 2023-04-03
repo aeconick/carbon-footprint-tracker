@@ -1,4 +1,4 @@
-import { useForm } from '../../hooks/userForm';
+import { useForm } from '../../hooks/useForm';
 import './CreateLog.css';
 
 //TODO: fix emissions bug

@@ -33,11 +33,14 @@ export const logServiceFactory = (token) => {
 
     const del = (logId) => request.del(`${baseUrl}/${logId}`);
 
+    const edit = (logId, data) => request.put(`${baseUrl}/${logId}`, data);
+
     return {
         getAll,
         getOne,
         create,
         addComment,
         del,
+        edit,
     }
 }

@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import './Register.css';
-import { useForm } from '../../hooks/userForm';
+import { useForm } from '../../hooks/useForm';
 import { AuthContext } from '../../contexts/AuthContext';
 
 export const Register = () => {
