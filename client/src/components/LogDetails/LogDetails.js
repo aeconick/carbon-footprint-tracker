@@ -1,13 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 
 import './LogDetails.css';
 
-import {logServiceFactory} from '../../services/logService';
+import { logServiceFactory } from '../../services/logService';
 import { useService } from '../../hooks/useService';
+import { AuthContext } from '../../contexts/AuthContext';
 import * as commentService from '../../services/commentService';
 
 export const LogDetails = () => {
+    const { userId } = useContext(AuthContext);
     const [username, setUsername] = useState('');
     const [comment, setComment] = useState('');
     //const [comments, setComments] = useState([]);
@@ -22,9 +24,9 @@ export const LogDetails = () => {
                 setLog(result);
                 // return commentService.getAll(logId);
             }) //promise chaining
-            // .then(result => {
-            //     setComments(result);
-            // });
+        // .then(result => {
+        //     setComments(result);
+        // });
     }, [logId]);
 
     const onCommentSubmit = async (e) => {
@@ -37,7 +39,7 @@ export const LogDetails = () => {
         // });
 
         //TODO: remove later, works for jsonstore only
-        await logService.addComment(logId,{
+        await logService.addComment(logId, {
             logId,
             username,
             comment,
@@ -47,6 +49,8 @@ export const LogDetails = () => {
         setComment('');
 
     };
+
+    const isOwner = log._ownerId === userId;
 
     return (
         <section id="log-details">
@@ -75,11 +79,11 @@ export const LogDetails = () => {
                         })} */}
                         {console.log(log.comments)}
                         {log.comments && Object.values(log.comments).map(x =>
-                            (
-                                <li key={x._id} className="comment">
-                                    <p>{`${x.username}: ${x.comment}`}</p>
-                                </li>
-                            )
+                        (
+                            <li key={x._id} className="comment">
+                                <p>{`${x.username}: ${x.comment}`}</p>
+                            </li>
+                        )
                         )}
 
                     </ul>
@@ -91,10 +95,12 @@ export const LogDetails = () => {
                 </div>
 
                 {/* edit/delete */}
-                <div className="buttons">
-                    <a href="#" className="button">Edit</a>
-                    <a href="#" className="button">Delete</a>
-                </div>
+                {isOwner && (
+                    <div className="buttons">
+                        <a href="#" className="button">Edit</a>
+                        <a href="#" className="button">Delete</a>
+                    </div>
+                )}
             </div>
 
             {/* comments */}
