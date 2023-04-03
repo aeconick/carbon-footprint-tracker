@@ -31,10 +31,13 @@ export const logServiceFactory = (token) => {
         return result;
     }
 
+    const del = (logId) => request.del(`${baseUrl}/${logId}`);
+
     return {
         getAll,
         getOne,
         create,
         addComment,
+        del,
     }
 }

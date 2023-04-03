@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams,useNavigate } from 'react-router-dom';
 
 import './LogDetails.css';
 
@@ -16,6 +16,7 @@ export const LogDetails = () => {
     const { logId } = useParams();
     const [log, setLog] = useState([]);
     const logService = useService(logServiceFactory);
+    const navigate = useNavigate();
 
     //TODO: not the best implementation (DONT MIX SERVICES)
     useEffect(() => {
@@ -51,6 +52,12 @@ export const LogDetails = () => {
     };
 
     const isOwner = log._ownerId === userId;
+
+    const onDeleteClick = async () => {
+        logService.del(log._id);
+//TODO: delete from state
+        navigate('/catalog');
+    }
 
     return (
         <section id="log-details">
@@ -98,7 +105,7 @@ export const LogDetails = () => {
                 {isOwner && (
                     <div className="buttons">
                         <a href="#" className="button">Edit</a>
-                        <a href="#" className="button">Delete</a>
+                        <a className="button" onClick={onDeleteClick}>Delete</a>
                     </div>
                 )}
             </div>
