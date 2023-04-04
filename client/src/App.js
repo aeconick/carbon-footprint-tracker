@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, } from 'react-router-dom';
 
 import { logServiceFactory } from './services/logService';
-import { authServiceFactory } from './services/authService';
-import { AuthContext } from './contexts/AuthContext';
+import { AuthProvider } from './contexts/AuthContext';
 import { useService } from './hooks/useService';
 
 import { Catalog } from "./components/Catalog";
@@ -21,9 +20,7 @@ import { EditLog } from './components/EditLog/EditLog';
 function App() {
   const navigate = useNavigate();
   const [logs, setLogs] = useState([]);
-  const [auth, setAuth] = useState({});
-  const logService = logServiceFactory(auth.accessToken);
-  const authService = authServiceFactory(auth.accessToken);
+  const logService = logServiceFactory(); //auth.accessToken
 
   useEffect(() => {
     logService.getAll()
@@ -38,43 +35,7 @@ function App() {
     setLogs(state => [...state, newLog]);
 
     navigate('/catalog');
-  }
-
-  //TODO: notify user if there is an error
-  const onLoginSubmit = async (data) => {
-    try {
-      const result = await authService.login(data);
-
-      setAuth(result);
-
-      navigate('/catalog');
-    } catch (error) {
-      console.log('error');
-    }
   };
-
-  const onRegisterSubmit = async (values) => {
-    const { confirmPassword, ...registerData } = values;
-    if (confirmPassword !== registerData.password) {
-      return; //TODO: notify user
-    }
-
-    try {
-      const result = await authService.register(values);
-
-      setAuth(result);
-
-      navigate('/catalog');
-    } catch (error) {
-      console.log('error');
-    }
-  }
-
-  const onLogout = async () => {
-    await authService.logout();
-
-    setAuth({});
-  }
 
   const onLogEditSubmit = async (values) => {
     const result = await logService.edit(values._id, values);
@@ -82,20 +43,10 @@ function App() {
     setLogs(state => state.map(x => x._id === values._id ? result : x));
 
     navigate(`catalog/${values._id}`);
-  }
-
-  const context = {
-    onLoginSubmit,
-    onRegisterSubmit,
-    onLogout,
-    userId: auth._id,
-    token: auth.accessToken,
-    userEmail: auth.email,
-    isAuthenticated: !!auth.accessToken, //truthy => true, falsy => false
   };
 
   return (
-    <AuthContext.Provider value={context}>
+    <AuthProvider>
       <div id="box">
         <Header />
 
@@ -115,7 +66,7 @@ function App() {
         <Footer />
 
       </div>
-    </AuthContext.Provider>
+    </AuthProvider>
   );
 }
 
