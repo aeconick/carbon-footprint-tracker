@@ -22,14 +22,7 @@ export const logServiceFactory = (token) => {
         const result = await request.post(baseUrl, logData);
 
         return result;
-    }
-
-    //TODO: delete later, only work for jsonstore
-    const addComment = async (logId, data) => {
-        const result = await request.post(`${baseUrl}/${logId}/comments`, data);
-
-        return result;
-    }
+    };
 
     const del = (logId) => request.del(`${baseUrl}/${logId}`);
 
@@ -39,7 +32,6 @@ export const logServiceFactory = (token) => {
         getAll,
         getOne,
         create,
-        addComment,
         del,
         edit,
     }

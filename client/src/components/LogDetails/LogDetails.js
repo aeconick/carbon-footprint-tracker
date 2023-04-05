@@ -1,20 +1,22 @@
 import { useEffect, useState, useContext } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 
-import './LogDetails.css';
-
 import { logServiceFactory } from '../../services/logService';
+import * as commentService from '../../services/commentService';
 import { useService } from '../../hooks/useService';
 import { AuthContext } from '../../contexts/AuthContext';
-import * as commentService from '../../services/commentService';
+import { useForm } from '../../hooks/useForm';
+
+import './LogDetails.css';
+import { AddComment } from './AddComment';
 
 export const LogDetails = () => {
-    const { userId } = useContext(AuthContext);
-    const [username, setUsername] = useState('');
-    const [comment, setComment] = useState('');
-    //const [comments, setComments] = useState([]);
     const { logId } = useParams();
+    const { userId, isAuthenticated } = useContext(AuthContext);
     const [log, setLog] = useState([]);
+    const { } = useForm({
+        comment: '',
+    })
     const logService = useService(logServiceFactory);
     const navigate = useNavigate();
 
@@ -30,24 +32,15 @@ export const LogDetails = () => {
         // });
     }, [logId]);
 
-    const onCommentSubmit = async (e) => {
-        e.preventDefault();
+    const onCommentSubmit = async (values) => {
+       const result = await commentService.create(logId,values.comment);
 
-        // await commentService.create({
-        //     logId,
-        //     username,
-        //     comment,
-        // });
+       console.log(result);
 
-        //TODO: remove later, works for jsonstore only
-        await logService.addComment(logId, {
-            logId,
-            username,
-            comment,
-        });
+        // state
 
-        setUsername('');
-        setComment('');
+        // setUsername('');
+        // setComment('');
 
     };
 
@@ -111,15 +104,7 @@ export const LogDetails = () => {
             </div>
 
             {/* comments */}
-            <article className="create-comment">
-                <label>Add new comment:</label>
-                <form className="form" onSubmit={onCommentSubmit}>
-                    {/* TODO: change onChange on username and comment to not be inline */}
-                    <input type="text" name="username" placeholder="Nikolay" value={username} onChange={(e) => setUsername(e.target.value)} />
-                    <textarea name="comment" placeholder="Write your comment here..." value={comment} onChange={(e) => setComment(e.target.value)}></textarea>
-                    <input className="btn submit" type="submit" value="Add Comment" />
-                </form>
-            </article>
+            {isAuthenticated && <AddComment onCommentSubmit={onCommentSubmit} />}
 
         </section>
     );

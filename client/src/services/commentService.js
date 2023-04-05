@@ -1,18 +1,19 @@
 import { requestFactory } from './requester';
 
-// const baseUrl = 'http://localhost:3030/jsonstore/comments'
+const baseUrl = 'http://localhost:3030/data/comments';
+const request = requestFactory();
 
-// export const getAll = async (logId) => {
-//     const query = encodeURIComponent(`logId="${logId}"`);
+export const getAll = async (logId) => {
+    const query = encodeURIComponent(`logId="${logId}"`);
 
-//     const result = await request.get(`${baseUrl}?where=${query}`);
-//     const comments = Object.values(result);
+    const result = await request.get(`${baseUrl}?where=${query}`);
+    const comments = Object.values(result);
 
-//     return comments;
-// }
+    return comments;
+}
 
-// export const create = async (data) => {
-//     const result = await request.post(baseUrl, data);
+export const create = async (logId,comment) => {
+    const result = await request.post(baseUrl, {logId,comment});
 
-//     return result;
-// }
+    return result;
+}

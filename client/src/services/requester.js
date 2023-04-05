@@ -37,10 +37,19 @@ const request = async (method, token, url, data) => {
 
 //function that just create an object
 export const requestFactory = (token) => {
+    if (!token) {
+        const serializedAuth = localStorage.getItem('auth');
+
+        if (serializedAuth) {
+            const auth = JSON.parse(serializedAuth);
+            token = auth.accessToken;
+        }
+    }
+
     return {
         get: request.bind(null, 'GET', token),
         post: request.bind(null, 'POST', token),
         put: request.bind(null, 'PUT', token),
         del: request.bind(null, 'DELETE', token),
     }
-}
+};
