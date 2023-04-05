@@ -20,28 +20,25 @@ export const LogDetails = () => {
     const logService = useService(logServiceFactory);
     const navigate = useNavigate();
 
-    //TODO: not the best implementation (DONT MIX SERVICES)
     useEffect(() => {
-        logService.getOne(logId)
-            .then(result => {
-                setLog(result);
-                // return commentService.getAll(logId);
-            }) //promise chaining
-        // .then(result => {
-        //     setComments(result);
-        // });
+        Promise.all([
+            logService.getOne(logId),
+            commentService.getAll(logId),
+        ]).then(([logData, comments]) => {
+            setLog({
+                ...logData,
+                comments,
+            });
+        });
     }, [logId]);
 
     const onCommentSubmit = async (values) => {
-       const result = await commentService.create(logId,values.comment);
+        const response = await commentService.create(logId, values.comment);
 
-       console.log(result);
-
-        // state
-
-        // setUsername('');
-        // setComment('');
-
+        setLog(state => ({
+            ...state,
+            comments: [...state.comments, response],
+        }));
     };
 
     const isOwner = log._ownerId === userId;
@@ -70,27 +67,18 @@ export const LogDetails = () => {
                 <div className="details-comments">
                     <h2>Comments:</h2>
                     <ul>
-                        {/* {comments.map(x => {
-                            (
-                                <li key={x._id} className="comment">
-                                    <p>{`${x.username} ${x.comment}`}</p>
-                                </li>
-                            )
-                        })} */}
-
-                        {log.comments && Object.values(log.comments).map(x =>
+                        {log.comments && log.comments.map(x =>
                         (
                             <li key={x._id} className="comment">
-                                <p>{`${x.username}: ${x.comment}`}</p>
+                                <p>{`${'x.username'}: ${x.comment}`}</p>
                             </li>
                         )
                         )}
-
                     </ul>
 
-                    {/* {comments.length === 0 && (
+                    {log.comments.length === 0 && (
                         <p className="no-comment">No comments.</p>
-                    )} */}
+                    )}
 
                 </div>
 
