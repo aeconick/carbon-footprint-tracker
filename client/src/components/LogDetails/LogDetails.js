@@ -1,22 +1,21 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext, useReducer } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 
 import { logServiceFactory } from '../../services/logService';
 import * as commentService from '../../services/commentService';
 import { useService } from '../../hooks/useService';
 import { AuthContext } from '../../contexts/AuthContext';
-import { useForm } from '../../hooks/useForm';
 
 import './LogDetails.css';
 import { AddComment } from './AddComment';
+import { logReducer } from '../../reducers/logReducer';
+
+
 
 export const LogDetails = () => {
     const { logId } = useParams();
     const { userId, isAuthenticated, userEmail } = useContext(AuthContext);
-    const [log, setLog] = useState([]);
-    const { } = useForm({
-        comment: '',
-    })
+    const [log, dispatch] = useReducer(logReducer, {});
     const logService = useService(logServiceFactory);
     const navigate = useNavigate();
 
@@ -25,25 +24,23 @@ export const LogDetails = () => {
             logService.getOne(logId),
             commentService.getAll(logId),
         ]).then(([logData, comments]) => {
-            setLog({
+            const logState = {
                 ...logData,
                 comments,
-            });
+            };
+
+            dispatch({ type: 'LOG_FETCH', log: logState });
         });
     }, [logId]);
 
     const onCommentSubmit = async (values) => {
         const response = await commentService.create(logId, values.comment);
 
-        setLog(state => ({
-            ...state,
-            comments: [...state.comments, {
-                ...response,
-                author: {
-                    email: userEmail,
-                }
-            }],
-        }));
+        dispatch({
+            type: 'COMMENT_ADD',
+            comment: response,
+            userEmail,
+        });
     };
 
     const isOwner = log._ownerId === userId;
