@@ -12,7 +12,7 @@ import { AddComment } from './AddComment';
 
 export const LogDetails = () => {
     const { logId } = useParams();
-    const { userId, isAuthenticated } = useContext(AuthContext);
+    const { userId, isAuthenticated, userEmail } = useContext(AuthContext);
     const [log, setLog] = useState([]);
     const { } = useForm({
         comment: '',
@@ -37,7 +37,12 @@ export const LogDetails = () => {
 
         setLog(state => ({
             ...state,
-            comments: [...state.comments, response],
+            comments: [...state.comments, {
+                ...response,
+                author: {
+                    email: userEmail,
+                }
+            }],
         }));
     };
 
@@ -67,16 +72,17 @@ export const LogDetails = () => {
                 <div className="details-comments">
                     <h2>Comments:</h2>
                     <ul>
+                        {/* TODO: make username from email and add it to header and to commend */}
                         {log.comments && log.comments.map(x =>
                         (
                             <li key={x._id} className="comment">
-                                <p>{`${'x.username'}: ${x.comment}`}</p>
+                                <p>{`${x.author.email}: ${x.comment}`}</p>
                             </li>
                         )
                         )}
                     </ul>
 
-                    {log.comments.length === 0 && (
+                    {log.comments?.length === 0 && (
                         <p className="no-comment">No comments.</p>
                     )}
 
