@@ -21,7 +21,7 @@
 
 #welcome-world>img {
     margin-bottom: 100px;
-    height: 700px;
+    height: 660px;
     display: inline-block;
     vertical-align: middle;
     max-width: 60%;
@@ -43,7 +43,7 @@
 
 .welcome-message h3 {
     color: #649a42;
-    font-size: 600%;
+    font-size: 620%;
     text-shadow: none;
     line-height: 1;
     font-weight: 700;
@@ -55,106 +55,15 @@
     font-family: "Agency FB";
 }
 
-#welcome-world>#home-page {
-    width: 50% fit-content;
-    margin: auto;
+.welcome-message h4 {
+    color: #165c4e;
+    font-size: 180%;
+    text-shadow: none;
+    line-height: 1;
     text-align: center;
-}
-
-#home-page {
-    background-color: transparent;
-    box-shadow: 0px 0px 10px 0px;
-    overflow: hidden;
-    border-radius: 10px;
-    padding: 55px;
-    height: auto;
-    width: auto;
-}
-
-.log {
-    box-shadow: 0px 0px 30px 0px;
-    margin-top: 20px;
-    padding: 50px;
-    margin-left: 120px;
-    background-position: right 35% bottom 45%;
-    box-sizing: border-box;
-    border-radius: 15px;
-    float: left;
-    height: auto;
-    color: rgb(131, 176, 204);
-}
-
-.image-wrap {
-    width: 250px;
-    height: 250px;
-    display: inline-block;
-    border-radius: 50%;
-    overflow: hidden;
-    position: relative;
-    text-align: center;
-}
-
-.image-wrap>img {
-    max-width: 100%;
-}
-
-.log>h3 {
-    color: #4a4e45;
-    font-family: "Agency FB";
-    font-size: 42px;
-    font-weight: 700;
-    line-height: normal;
-    width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    transition: all 0.5s ease-out;
-    text-align: center;
+    letter-spacing: normal;
+    word-spacing: normal;
     text-transform: uppercase;
-}
-
-.log-content>h4 {
-    color: #c2d4f8;
-    font-size: 24px;
-    text-align: center;
     font-weight: 700;
-    line-height: normal;
-}
-
-.quotes {
-    unicode-bidi: bidi-override;
-    text-align: center;
-    direction: rtl;
-}
-
-.quotes span {
-    font-size: 25px;
-    padding: 4px;
-}
-
-.details-btn {
-    background-color: #4a4e45cc;
-    font-size: 1rem;
-    padding-top: 20px;
-    margin-top: 10px;
-    color: white;
-    padding: 0.8em 1.4em;
-}
-
-.data-buttons {
-    font-size: 1.4rem;
-    padding-top: 20px;
-    text-align: center;
-}
-
-.btn.details-btn:hover {
-    background-color: rgba(74, 78, 69, 0.234);
-    color: white;
-}
-
-#home-page>h1 {
-    color: #4a4e45;
-    text-align: center;
-    font-weight: 700;
-    font-size: 84px;
     font-family: "Agency FB";
 }
