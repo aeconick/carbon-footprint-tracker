@@ -47,6 +47,6 @@ export const requestFactory = () => {
         post: requester.bind(null, 'POST'),
         put: requester.bind(null, 'PUT'),
         patch: requester.bind(null, 'PATCH'),
-        delete: requester.bind(null, 'DELETE'),
+        del: requester.bind(null, 'DELETE'),
     }
 };

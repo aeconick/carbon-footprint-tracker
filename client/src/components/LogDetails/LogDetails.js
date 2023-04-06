@@ -5,17 +5,18 @@ import { logServiceFactory } from '../../services/logService';
 import * as commentService from '../../services/commentService';
 import { useService } from '../../hooks/useService';
 import { AuthContext } from '../../contexts/AuthContext';
+import { LogContext } from '../../contexts/LogContext';
 
 import './LogDetails.css';
 import { AddComment } from './AddComment';
 import { logReducer } from '../../reducers/logReducer';
 
-//TODO: fix state
-
 export const LogDetails = () => {
     const { logId } = useParams();
     const { userId, isAuthenticated, userEmail } = useContext(AuthContext);
+    const { deleteLog } = useContext(LogContext);
     const [log, dispatch] = useReducer(logReducer, {});
+    const [showModal, setShowModal] = useState(false);
     const logService = useService(logServiceFactory);
     const navigate = useNavigate();
 
@@ -45,11 +46,25 @@ export const LogDetails = () => {
 
     const isOwner = log._ownerId === userId;
 
-    const onDeleteClick = async () => {
-        logService.del(log._id);
-        //TODO: delete from state
+    const onDeleteClick = () => {
+        setShowModal(true);
+    };
+
+    const onModalAccept = async () => {
+        console.log('hello modal');
+        await logService.del(log._id);
+
+        deleteLog(log._id);
+
+        setShowModal(false);
+
         navigate('/catalog');
-    }
+    };
+
+    const onModalDecline = () => {
+        setShowModal(false);
+    };
+
 
     return (
         <section id="log-details">
@@ -69,11 +84,10 @@ export const LogDetails = () => {
                 <div className="details-comments">
                     <h2>Comments:</h2>
                     <ul>
-                        {/* TODO: make username from email and add it to header and to commend */}
                         {log.comments && log.comments.map(x =>
                         (
                             <li key={x._id} className="comment">
-                                <p>{`${x.author.email}: ${x.comment}`}</p>
+                                <p>{`${(x.author.email).split('@')[0]}: ${x.comment}`}</p>
                             </li>
                         )
                         )}
@@ -90,6 +104,19 @@ export const LogDetails = () => {
                     <div className="buttons">
                         <Link to={`/catalog/${log._id}/edit`} className="button">Edit</Link>
                         <a className="button" onClick={onDeleteClick}>Delete</a>
+                    </div>
+                )}
+
+                {/* modal */}
+                {showModal && (
+                    <div id="myModal" className="modal">
+                        <div className="modal-content">
+                            <p className="modal-text">Are you sure you want to delete this Log?</p>
+                            <div className="modal-buttons">
+                            <button className="button" onClick={onModalAccept}>Yes</button>
+                            <button className="button" onClick={onModalDecline}>Cancel</button>
+                            </div>
+                        </div>
                     </div>
                 )}
             </div>
