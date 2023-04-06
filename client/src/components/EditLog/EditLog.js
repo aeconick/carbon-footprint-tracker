@@ -1,15 +1,15 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import { useForm } from "../../hooks/useForm";
 import { useService } from "../../hooks/useService";
 import { logServiceFactory } from "../../services/logService";
+import { LogContext } from "../../contexts/LogContext";
 
 import './EditLog.css';
 
-export const EditLog = ({
-    onLogEditSubmit,
-}) => {
+export const EditLog = () => {
+    const { onLogEditSubmit } = useContext(LogContext);
     const { logId } = useParams();
     const logService = useService(logServiceFactory);
     const { values, changeHandler, onSubmit, changeValues } = useForm({

@@ -10,7 +10,7 @@ import './LogDetails.css';
 import { AddComment } from './AddComment';
 import { logReducer } from '../../reducers/logReducer';
 
-
+//TODO: fix state
 
 export const LogDetails = () => {
     const { logId } = useParams();

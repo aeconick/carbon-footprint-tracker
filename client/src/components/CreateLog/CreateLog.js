@@ -1,19 +1,22 @@
+import { useContext } from 'react';
 import { useForm } from '../../hooks/useForm';
+
+import { LogContext } from '../../contexts/LogContext';
+
 import './CreateLog.css';
 
 //TODO: fix emissions bug
 
 
-export const CreateLog = ({
-    onCrateLogSubmit,
-}) => {
+export const CreateLog = () => {
+    const { onCreateLogSubmit } = useContext(LogContext);
     const { values, changeHandler, onSubmit } = useForm({
         title: '',
         category: '',
         emissions: '',
         imageUrl: '',
         summary: '',
-    }, onCrateLogSubmit);
+    }, onCreateLogSubmit);
 
     return (
         <section id="create-page" className="auth">
