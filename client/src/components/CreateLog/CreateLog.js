@@ -6,7 +6,7 @@ import { LogContext } from '../../contexts/LogContext';
 import './CreateLog.css';
 
 export const CreateLog = () => {
-    const { onCreateLogSubmit } = useContext(LogContext);
+    const { onCreateLogSubmit,error } = useContext(LogContext);
     const { values, changeHandler, onSubmit } = useForm({
         title: '',
         category: '',
@@ -51,6 +51,7 @@ export const CreateLog = () => {
                     />
                     <label htmlFor="summary">Summary:</label>
                     <textarea value={values.summary} onChange={changeHandler} name="summary" id="summary" />
+                    {error && <p className="error">{error}</p>}
                     <input className="btn submit" type="submit" defaultValue="Create Log" />
                 </div>
             </form>

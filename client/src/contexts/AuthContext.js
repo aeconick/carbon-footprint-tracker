@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { authServiceFactory } from '../services/authService';
@@ -15,18 +15,18 @@ export const AuthProvider = ({
 
     const authService = authServiceFactory(auth.accessToken);
 
-    //TODO: notify user if there is an error
     const onLoginSubmit = async (data) => {
         try {
             const result = await authService.login(data);
-
+            
             setAuth(result);
-
+            
+            //notify user if there is an error
             setError('');
 
             navigate('/catalog');
         } catch (error) {
-            setError(error.message); //TODO
+            setError(error.message);
         }
     };
 
@@ -38,7 +38,7 @@ export const AuthProvider = ({
         }
         if (confirmPassword !== registerData.password) {
             setError('Password do not match!');
-            return; //TODO: notify user
+            return;
         }
 
         try {

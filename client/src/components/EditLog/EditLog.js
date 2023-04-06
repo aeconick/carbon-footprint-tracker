@@ -5,11 +5,13 @@ import { useForm } from "../../hooks/useForm";
 import { useService } from "../../hooks/useService";
 import { logServiceFactory } from "../../services/logService";
 import { LogContext } from "../../contexts/LogContext";
+import { AuthContext } from "../../contexts/AuthContext";
 
 import './EditLog.css';
 
 export const EditLog = () => {
-    const { onLogEditSubmit } = useContext(LogContext);
+    const { onLogEditSubmit, error } = useContext(LogContext);
+    const { userId } = useContext(AuthContext)
     const { logId } = useParams();
     const logService = useService(logServiceFactory);
     const { values, changeHandler, onSubmit, changeValues } = useForm({
@@ -21,14 +23,18 @@ export const EditLog = () => {
         summary: '',
     }, onLogEditSubmit);
 
+    let logOwnerId = '';
+
     useEffect(() => {
         logService.getOne(logId)
             .then(result => {
+                logOwnerId = result._ownerId;
                 changeValues(result);
             })
     }, [logId]);
-    
-    //TODO: add validation: if its owner show edit if its not go to details
+
+    let isOwner = (logOwnerId === userId); //TODO: fix
+    console.log(isOwner);
     return (
         <section id="edit-page" className="auth">
             <form id="edit" method="POST" onSubmit={onSubmit}>
@@ -74,6 +80,7 @@ export const EditLog = () => {
 
                     <label htmlFor="summary">Summary:</label>
                     <textarea name="summary" id="summary" value={values.summary} onChange={changeHandler}></textarea>
+                    {error && <p className="error">{error}</p>}
                     <input className="btn submit" type="submit" value="Edit Log" />
 
                 </div>

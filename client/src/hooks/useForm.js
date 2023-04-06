@@ -11,10 +11,11 @@ export const useForm = (initialValues, onSubmitHandler) => {
         e.preventDefault();
 
         onSubmitHandler(values);
-        
+
         setValues(initialValues); //clears the form
     };
 
+    //for edit log
     const changeValues = (newValues) => {
         //TODO: validate newValues(are they the same as old)
 

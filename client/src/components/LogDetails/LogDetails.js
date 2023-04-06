@@ -17,6 +17,7 @@ export const LogDetails = () => {
     const { deleteLog } = useContext(LogContext);
     const [log, dispatch] = useReducer(logReducer, {});
     const [showModal, setShowModal] = useState(false);
+    const [error,setError] = useState('');
     const logService = useService(logServiceFactory);
     const navigate = useNavigate();
 
@@ -35,6 +36,10 @@ export const LogDetails = () => {
     }, [logId]);
 
     const onCommentSubmit = async (values) => {
+        if(values.comment.length<2){
+            setError('Comment is too short!');
+            return;
+        }
         const response = await commentService.create(logId, values.comment);
 
         dispatch({
@@ -42,6 +47,8 @@ export const LogDetails = () => {
             comment: response,
             userEmail,
         });
+
+        setError('');
     };
 
     const isOwner = log._ownerId === userId;
@@ -72,7 +79,7 @@ export const LogDetails = () => {
             <div className="info-section">
 
                 <div className="log-header">
-                    <img className="log-img" src={log.imageUrl} />
+                    <img className="log-img" src={log.imageUrl} alt='something' />
                     <h1>{log.title}</h1>
                     <span className="emissions">Emissions: {log.emissions}</span>
                     <p className="type">{log.category}</p>
@@ -122,7 +129,7 @@ export const LogDetails = () => {
             </div>
 
             {/* comments */}
-            {isAuthenticated && <AddComment onCommentSubmit={onCommentSubmit} />}
+            {isAuthenticated && <AddComment onCommentSubmit={onCommentSubmit} error={error}/>}
 
         </section>
     );
