@@ -16,60 +16,65 @@ import { Register } from "./components/Register";
 import { LogDetails } from './components/LogDetails';
 import { Logout } from './components/Logout';
 import { EditLog } from './components/EditLog/EditLog';
+import { RouteGuard } from './components/RouteGuard/RouteGuard';
 
 
 function App() {
-  const navigate = useNavigate();
-  const [logs, setLogs] = useState([]);
-  const logService = logServiceFactory(); //auth.accessToken
+    const navigate = useNavigate();
+    const [logs, setLogs] = useState([]);
+    const logService = logServiceFactory(); //auth.accessToken
 
-  useEffect(() => {
-    logService.getAll()
-      .then(result => {
-        setLogs(result)
-      })
-  }, []);
+    useEffect(() => {
+        logService.getAll()
+            .then(result => {
+                setLogs(result)
+            })
+    }, []);
 
-  const onCreateLogSubmit = async (data) => {
-    const newLog = await logService.create(data);
+    const onCreateLogSubmit = async (data) => {
+        const newLog = await logService.create(data);
 
-    setLogs(state => [...state, newLog]);
+        setLogs(state => [...state, newLog]);
 
-    navigate('/catalog');
-  };
+        navigate('/catalog');
+    };
 
-  const onLogEditSubmit = async (values) => {
-    const result = await logService.edit(values._id, values);
+    const onLogEditSubmit = async (values) => {
+        const result = await logService.edit(values._id, values);
 
-    setLogs(state => state.map(x => x._id === values._id ? result : x));
+        setLogs(state => state.map(x => x._id === values._id ? result : x));
 
-    navigate(`catalog/${values._id}`);
-  };
+        navigate(`catalog/${values._id}`);
+    };
 
-  return (
-    <AuthProvider>
-      <div id="box">
-        <Header />
+    return (
+        <AuthProvider>
+            <div id="box">
+                <Header />
 
-        <main id="main-content">
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/about' element={<About />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/logout' element={<Logout />} />
-            <Route path='/register' element={<Register />} />
-            <Route path='/create-log' element={<CreateLog onCrateLogSubmit={onCreateLogSubmit} />} />
-            <Route path='/catalog' element={<Catalog logs={logs} />} />
-            <Route path='/catalog/:logId' element={<LogDetails />} />
-            <Route path='/catalog/:logId/edit' element={<EditLog onLogEditSubmit={onLogEditSubmit} />} />
-          </Routes>
-        </main>
+                <main id="main-content">
+                    <Routes>
+                        <Route path='/' element={<Home />} />
+                        <Route path='/about' element={<About />} />
+                        <Route path='/login' element={<Login />} />
+                        <Route path='/logout' element={<Logout />} />
+                        <Route path='/register' element={<Register />} />
+                        <Route path='/create-log' element={
+                            <RouteGuard>
+                                <CreateLog onCrateLogSubmit={onCreateLogSubmit} />
+                            </RouteGuard>
+                        } />
+                        <Route path='/catalog' element={<Catalog logs={logs} />} />
+                        <Route path='/catalog/:logId' element={<LogDetails />} />
+                        <Route path='/catalog/:logId/edit' element={<EditLog onLogEditSubmit={onLogEditSubmit} />} />
+                    </Routes>
+                </main>
 
-        {/* TODO: <Footer /> */}
+                {/* TODO: <Footer /> */}
 
-      </div>
-    </AuthProvider>
-  );
+            </div>
+        </AuthProvider>
+    );
 }
 
 export default App;
