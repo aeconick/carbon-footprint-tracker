@@ -35,10 +35,6 @@ export const LogProvider = ({
         navigate(`catalog/${values._id}`);
     };
 
-    const getLog = (logId) => {
-        return logs.find(log => log._id === logId);
-    };
-
     const deleteLog = (logId) => {
         setLogs(state => state.filter(log => log._id !== logId));
     }

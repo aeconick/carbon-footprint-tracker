@@ -10,7 +10,7 @@ export const Register = () => {
     const { values, changeHandler, onSubmit } = useForm({
         email: '',
         password: '',
-        confirmPassword: '', //TODO: make this like login with object
+        confirmPassword: '',
     }, onRegisterSubmit);
 
     return (
