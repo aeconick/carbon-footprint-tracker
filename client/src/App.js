@@ -16,7 +16,7 @@ import { Register } from "./components/Register";
 import { LogDetails } from './components/LogDetails';
 import { Logout } from './components/Logout';
 import { EditLog } from './components/EditLog/EditLog';
-import { RouteGuard } from './components/RouteGuard/RouteGuard';
+import { RouteGuard } from './components/Guards/RouteGuard';
 
 
 function App() {
@@ -57,16 +57,16 @@ function App() {
                         <Route path='/' element={<Home />} />
                         <Route path='/about' element={<About />} />
                         <Route path='/login' element={<Login />} />
-                        <Route path='/logout' element={<Logout />} />
                         <Route path='/register' element={<Register />} />
-                        <Route path='/create-log' element={
-                            <RouteGuard>
-                                <CreateLog onCrateLogSubmit={onCreateLogSubmit} />
-                            </RouteGuard>
-                        } />
                         <Route path='/catalog' element={<Catalog logs={logs} />} />
                         <Route path='/catalog/:logId' element={<LogDetails />} />
-                        <Route path='/catalog/:logId/edit' element={<EditLog onLogEditSubmit={onLogEditSubmit} />} />
+
+                        <Route element={<RouteGuard />}>
+                            <Route path='/create-log' element={<CreateLog onCrateLogSubmit={onCreateLogSubmit} />} />
+                            <Route path='/catalog/:logId/edit' element={<EditLog onLogEditSubmit={onLogEditSubmit} />} />
+                            <Route path='/logout' element={<Logout />} />
+                        </Route>
+
                     </Routes>
                 </main>
 
