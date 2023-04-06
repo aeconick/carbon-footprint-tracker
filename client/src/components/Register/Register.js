@@ -15,7 +15,7 @@ export const Register = () => {
 
     return (
         <section id="register-page" className="content auth">
-            <form id="register" method='POST' onSubmit={onSubmit}>
+            <form id="register" method='POST' onSubmit={onSubmit} novalidate="">
                 <div className="container">
                     <div className="brand-logo" />
                     <h1>Register</h1>

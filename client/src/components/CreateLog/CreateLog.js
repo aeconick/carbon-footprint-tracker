@@ -5,9 +5,6 @@ import { LogContext } from '../../contexts/LogContext';
 
 import './CreateLog.css';
 
-//TODO: fix emissions bug
-
-
 export const CreateLog = () => {
     const { onCreateLogSubmit } = useContext(LogContext);
     const { values, changeHandler, onSubmit } = useForm({
@@ -20,7 +17,7 @@ export const CreateLog = () => {
 
     return (
         <section id="create-page" className="auth">
-            <form id="create" method='POST' onSubmit={onSubmit}>
+            <form id="create" method='POST' onSubmit={onSubmit} >
                 <div className="container">
                     <h1>Create Log</h1>
                     <label htmlFor="log-title">Log title:</label>

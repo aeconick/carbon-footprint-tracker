@@ -9,7 +9,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({
     children
 }) => {
-    const [auth, setAuth] = useLocalStorage('auth',{});
+    const [auth, setAuth] = useLocalStorage('auth', {});
     const navigate = useNavigate();
 
     const authService = authServiceFactory(auth.accessToken);
@@ -23,7 +23,7 @@ export const AuthProvider = ({
 
             navigate('/catalog');
         } catch (error) {
-            console.log('error');
+            throw error; //TODO
         }
     };
 

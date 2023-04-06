@@ -14,7 +14,7 @@ export const Login = () => {
 
     return (
         <section id="login-page" className="auth">
-            <form id="login" method='POST' onSubmit={onSubmit}>
+            <form id="login" method='POST' onSubmit={onSubmit} novalidate="">
                 <div className="container">
                     <div className="brand-logo" />
                     <h1>Login</h1>
