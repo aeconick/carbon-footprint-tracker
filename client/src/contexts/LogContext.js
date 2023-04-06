@@ -39,9 +39,13 @@ export const LogProvider = ({
         return logs.find(log => log._id === logId);
     };
 
+    const deleteLog = (logId) => {
+        setLogs(state => state.filter(log => log._id !== logId));
+    }
+
     const contextValues = {
         logs,
-        getLog,
+        deleteLog,
         onCreateLogSubmit,
         onLogEditSubmit,
     };
