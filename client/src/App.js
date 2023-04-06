@@ -5,7 +5,6 @@ import { LogProvider } from './contexts/LogContext';
 
 import { Catalog } from "./components/Catalog";
 import { CreateLog } from "./components/CreateLog";
-//import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { Home } from "./components/Home";
 import { About } from './components/About';
@@ -15,7 +14,6 @@ import { LogDetails } from './components/LogDetails';
 import { Logout } from './components/Logout';
 import { EditLog } from './components/EditLog/EditLog';
 import { RouteGuard } from './components/Guards/RouteGuard';
-import { LogOwner } from './components/Guards/LogOwner';
 
 
 function App() {
@@ -27,6 +25,7 @@ function App() {
 
                     <main id="main-content">
                         <Routes>
+
                             <Route path='/' element={<Home />} />
                             <Route path='/about' element={<About />} />
                             <Route path='/login' element={<Login />} />
@@ -35,16 +34,13 @@ function App() {
                             <Route path='/catalog' element={<Catalog />} />
 
                             <Route element={<RouteGuard />}>
-                                {/* TODO: add guard or check if owner id and userid match */}
                                 <Route path='/catalog/:logId/edit' element={<EditLog />} />
                                 <Route path='/create-log' element={<CreateLog />} />
                                 <Route path='/logout' element={<Logout />} />
-                            </Route>
 
+                            </Route>
                         </Routes>
                     </main>
-
-                    {/* TODO: <Footer /> */}
 
                 </div>
             </LogProvider>
