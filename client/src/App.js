@@ -15,6 +15,7 @@ import { LogDetails } from './components/LogDetails';
 import { Logout } from './components/Logout';
 import { EditLog } from './components/EditLog/EditLog';
 import { RouteGuard } from './components/Guards/RouteGuard';
+import { LogOwner } from './components/Guards/LogOwner';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
                             <Route path='/catalog' element={<Catalog />} />
 
                             <Route element={<RouteGuard />}>
+                                {/* TODO: add guard or check if owner id and userid match */}
                                 <Route path='/catalog/:logId/edit' element={<EditLog />} />
                                 <Route path='/create-log' element={<CreateLog />} />
                                 <Route path='/logout' element={<Logout />} />

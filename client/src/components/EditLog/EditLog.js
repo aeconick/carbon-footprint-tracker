@@ -27,7 +27,8 @@ export const EditLog = () => {
                 changeValues(result);
             })
     }, [logId]);
-    //TODO: add summary to state(make it controlled component)
+    
+    //TODO: add validation: if its owner show edit if its not go to details
     return (
         <section id="edit-page" className="auth">
             <form id="edit" method="POST" onSubmit={onSubmit}>

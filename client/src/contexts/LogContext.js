@@ -35,11 +35,16 @@ export const LogProvider = ({
         navigate(`catalog/${values._id}`);
     };
 
+    const getLog = (logId) => {
+        return logs.find(log => log._id === logId);
+    };
+
     const contextValues = {
         logs,
+        getLog,
         onCreateLogSubmit,
         onLogEditSubmit,
-    }
+    };
 
     return (
         <LogContext.Provider value={contextValues}>
