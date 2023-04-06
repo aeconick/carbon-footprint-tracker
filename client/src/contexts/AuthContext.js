@@ -10,6 +10,7 @@ export const AuthProvider = ({
     children
 }) => {
     const [auth, setAuth] = useLocalStorage('auth', {});
+    const [error, setError] = useState('');
     const navigate = useNavigate();
 
     const authService = authServiceFactory(auth.accessToken);
@@ -21,15 +22,22 @@ export const AuthProvider = ({
 
             setAuth(result);
 
+            setError('');
+
             navigate('/catalog');
         } catch (error) {
-            throw error; //TODO
+            setError(error.message); //TODO
         }
     };
 
     const onRegisterSubmit = async (values) => {
         const { confirmPassword, ...registerData } = values;
+        if (registerData.password.length <= 5) {
+            setError('Password is too short!');
+            return;
+        }
         if (confirmPassword !== registerData.password) {
+            setError('Password do not match!');
             return; //TODO: notify user
         }
 
@@ -38,9 +46,11 @@ export const AuthProvider = ({
 
             setAuth(result);
 
+            setError('');
+
             navigate('/catalog');
         } catch (error) {
-            console.log('error');
+            setError(error.message);
         }
     };
 
@@ -54,6 +64,7 @@ export const AuthProvider = ({
         onLoginSubmit,
         onRegisterSubmit,
         onLogout,
+        error,
         userId: auth._id,
         token: auth.accessToken,
         userEmail: auth.email,

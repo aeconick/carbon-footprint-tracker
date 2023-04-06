@@ -117,3 +117,10 @@ label[for="terms"]>input {
     border-radius: 10px;
     padding: 5px;
 }
+
+.error{
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    color: rgb(194, 28, 28);
+    margin-top: 15px;
+}
