@@ -20,7 +20,6 @@ const {isAuthenticated} = useContext(AuthContext);
                     <Link to="/logout">Logout</Link>
                 </div>
                 )}
-                
                 {/* Guest users */}
                 {!isAuthenticated && (
                     <div id="guest">
@@ -28,6 +27,7 @@ const {isAuthenticated} = useContext(AuthContext);
                     <Link to="/register">Register</Link>
                 </div>
                 )}
+                <Link to="/about">About</Link>
             </nav>
         </header>
     );

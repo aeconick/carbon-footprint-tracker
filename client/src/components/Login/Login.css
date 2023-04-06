@@ -2,7 +2,6 @@
     position: relative;
     width: 650px;
     height: auto;
-    border-radius: 20px;
     padding: 40px;
     box-sizing: border-box;
     box-shadow: 0px 0px 10px 0px;
@@ -15,7 +14,7 @@
 .brand-logo {
     height: 100px;
     width: 100px;
-    background: url("./login.png");
+    background: url("./leaf.jpg");
     background-size: contain;
     margin: auto;
     border-radius: 50%;

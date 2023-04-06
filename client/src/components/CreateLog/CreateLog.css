@@ -2,11 +2,10 @@
     position: relative;
     width: 800px;
     height: auto;
-    border-radius: 20px;
     padding: 40px;
     box-sizing: border-box;
     text-align: center;
-    background: #3e4443;
+    box-shadow: 0px 0px 10px 0px;
 }
 
 input[type="text"] {

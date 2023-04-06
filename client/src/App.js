@@ -7,9 +7,10 @@ import { useService } from './hooks/useService';
 
 import { Catalog } from "./components/Catalog";
 import { CreateLog } from "./components/CreateLog";
-import { Footer } from "./components/Footer";
+//import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { Home } from "./components/Home";
+import { About } from './components/About';
 import { Login } from "./components/Login";
 import { Register } from "./components/Register";
 import { LogDetails } from './components/LogDetails';
@@ -53,6 +54,7 @@ function App() {
         <main id="main-content">
           <Routes>
             <Route path='/' element={<Home />} />
+            <Route path='/about' element={<About />} />
             <Route path='/login' element={<Login />} />
             <Route path='/logout' element={<Logout />} />
             <Route path='/register' element={<Register />} />
@@ -63,7 +65,7 @@ function App() {
           </Routes>
         </main>
 
-        <Footer />
+        {/* TODO: <Footer /> */}
 
       </div>
     </AuthProvider>

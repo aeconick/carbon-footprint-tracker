@@ -1,8 +1,7 @@
 #catalog-page {
     background-color: transparent;
-    box-shadow: 0px 0px 40px 0px;
+    box-shadow: 0px 0px 10px 0px;
     overflow: hidden;
-    border-radius: 10px;
     padding: 20px;
     height: auto;
     width: 900px;
@@ -62,7 +61,7 @@
 }
 
 .details-button {
-    background-color: #2A265F;
+    background-color: #607874;
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
     color: #fff;
     font-size: 20px;
