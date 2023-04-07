@@ -1,7 +1,8 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 
 import { logServiceFactory } from '../services/logService';
+import { AuthContext } from "./AuthContext";
 
 export const LogContext = createContext();
 
@@ -9,7 +10,9 @@ export const LogProvider = ({
     children,
 }) => {
     const navigate = useNavigate();
+    const { userId } = useContext(AuthContext);
     const [logs, setLogs] = useState([]);
+    const [personalLogs, setPersonalLogs] = useState([]);
     const [error, setError] = useState('');
     const logService = logServiceFactory();
 
@@ -17,6 +20,14 @@ export const LogProvider = ({
         logService.getAll()
             .then(result => {
                 setLogs(result)
+            })
+    }, []);
+
+    useEffect(() => {
+        logService.getPersonal(userId)
+            .then(result => {
+                setPersonalLogs(result)
+                console.log(result);
             })
     }, []);
 
@@ -65,6 +76,7 @@ export const LogProvider = ({
 
     const contextValues = {
         logs,
+        personalLogs,
         error,
         deleteLog,
         onCreateLogSubmit,

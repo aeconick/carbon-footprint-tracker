@@ -11,13 +11,24 @@ export const logServiceFactory = (token) => {
 
         return logs;
     };
-
+ 
     const getOne = async (logId) => {
         const result = await request.get(`${baseUrl}/${logId}`);
-
+        
         return result;
     };
 
+    const getPersonal = async (userId) => {
+        const searchQuery = encodeURIComponent(`_ownerId="${userId}"`);
+       // const relationQuery = encodeURIComponent(`author=_ownerId:logs`);
+    
+        const result = await request.get(`${baseUrl}?where=${searchQuery}`);
+        
+        const personalLogs = Object.values(result);
+    
+        return personalLogs;
+    };
+    
     const create = async (logData) => {
         const result = await request.post(baseUrl, logData);
 
@@ -31,6 +42,7 @@ export const logServiceFactory = (token) => {
     return {
         getAll,
         getOne,
+        getPersonal,
         create,
         del,
         edit,
