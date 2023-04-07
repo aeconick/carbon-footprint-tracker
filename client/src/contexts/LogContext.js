@@ -29,7 +29,7 @@ export const LogProvider = ({
                 setPersonalLogs(result)
                 console.log(result);
             })
-    }, []);
+    }, [userId]);
 
     const onCreateLogSubmit = async (data) => {
         if ((data.category === '') || (data.emissions === '') || (data.imageUrl === '') || (data.summary === '') || (data.title === '')) {
@@ -44,6 +44,7 @@ export const LogProvider = ({
         const newLog = await logService.create(data);
 
         setLogs(state => [...state, newLog]);
+        setPersonalLogs(state => [...state, newLog]);
 
         setError('');
 
@@ -64,6 +65,7 @@ export const LogProvider = ({
         const result = await logService.edit(values._id, values);
 
         setLogs(state => state.map(x => x._id === values._id ? result : x));
+        setPersonalLogs(state => state.map(x => x._id === values._id ? result : x));
 
         setError('');
 
@@ -72,6 +74,7 @@ export const LogProvider = ({
 
     const deleteLog = (logId) => {
         setLogs(state => state.filter(log => log._id !== logId));
+        setPersonalLogs(state => state.filter(log => log._id !== logId));
     }
 
     const contextValues = {
