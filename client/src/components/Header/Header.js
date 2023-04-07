@@ -12,10 +12,11 @@ const {isAuthenticated} = useContext(AuthContext);
         <header>
             <h1><Link className="home" to="/">CarbonTracker</Link></h1>
             <nav>
-                <Link to="/catalog">All logs</Link>
+                <Link to="/catalog">All Logs</Link>
                 {/* Logged users */}
                 {isAuthenticated && (
                     <div id="user">
+                    <Link to="/diary">Diary</Link>
                     <Link to="/create-log">Log Emission</Link>
                     <Link to="/logout">Logout</Link>
                 </div>
