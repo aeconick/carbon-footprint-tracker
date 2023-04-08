@@ -4,10 +4,10 @@ export const logReducer = (state, action) => {
             return {...action.log};
         case 'COMMENT_ADD':
             return {
-                ...state,
-                comments: [...state.comments, {
-                    ...action.comment,
-                    author: {
+                ...state, //spread old state
+                comments: [...state.comments, { //spread old comments
+                    ...action.comment, //add new comment
+                    author: { //add author
                         email: action.userEmail,
                     }
                 }],

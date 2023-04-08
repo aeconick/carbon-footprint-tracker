@@ -58,7 +58,6 @@ export const LogDetails = () => {
     };
 
     const onModalAccept = async () => {
-        console.log('hello modal');
         await logService.del(log._id);
 
         deleteLog(log._id);

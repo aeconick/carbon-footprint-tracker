@@ -23,18 +23,13 @@ export const EditLog = () => {
         summary: '',
     }, onLogEditSubmit);
 
-    let logOwnerId = '';
-
     useEffect(() => {
         logService.getOne(logId)
             .then(result => {
-                logOwnerId = result._ownerId;
                 changeValues(result);
             })
     }, [logId]);
 
-    let isOwner = (logOwnerId === userId); //TODO: fix
-    console.log(isOwner);
     return (
         <section id="edit-page" className="auth">
             <form id="edit" method="POST" onSubmit={onSubmit}>

@@ -30,14 +30,21 @@ export const AuthProvider = ({
         }
     };
 
-    const onRegisterSubmit = async (values) => {
+    const onRegisterSubmit = async (values) => { //TODO: check email
         const { confirmPassword, ...registerData } = values;
-        if (registerData.password.length <= 5) {
-            setError('Password is too short!');
+
+        if (!(/.+\@.+\..+/.test(registerData.email))) {
+            setError('Invalid email!');
             return;
         }
+
         if (confirmPassword !== registerData.password) {
-            setError('Password do not match!');
+            setError('Password does not match!');
+            return;
+        }
+
+        if (registerData.password.length <= 5) {
+            setError('Password is too short!');
             return;
         }
 

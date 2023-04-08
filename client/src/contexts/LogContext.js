@@ -27,7 +27,6 @@ export const LogProvider = ({
         logService.getPersonal(userId)
             .then(result => {
                 setPersonalLogs(result)
-                console.log(result);
             })
     }, [userId]);
 
@@ -52,13 +51,12 @@ export const LogProvider = ({
     };
 
     const onLogEditSubmit = async (values) => {
-        console.log(values);
         if ((values.category === '') || (values.emissions === '') || (values.imageUrl === '') || (values.summary === '') || (values.title === '')) {
             setError('All fields must be filled!');
             return;
         }
         if (!(/(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg|gif|png|svg))/.test(values.imageUrl))) {
-            setError('Invalid image url!'); //TODO:maybe a bug
+            setError('Invalid image url!');
             return;
         }
 

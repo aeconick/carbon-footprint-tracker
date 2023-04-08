@@ -12,7 +12,6 @@ export const Diary = () => {
     personalLogs.forEach(log => {
         totalEmissions += Number(log.emissions);
     });
-    console.log(totalEmissions);
 
     return (
         <section id="diary-page">
