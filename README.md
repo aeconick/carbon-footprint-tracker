@@ -60,7 +60,7 @@ cd server
 node server.js
 ```
 
-1. To start the client you need to open a new terminal at the **client** folder and run the command:
+2. To start the client you need to open a new terminal at the **client** folder and run the command:
 
 ```console
 cd client
