@@ -1,6 +1,6 @@
 # Carbon Footprint Tracker
 
-**Carbon Footprint Tracker** is a web application (Single Page Application) using React.js i've made as a final project for [SoftUni's](https://softuni.bg/) ReactJS Course. The app is a basic tracking system that lets users track their carbon footprint via Logs(activity and emissions) and connect to one another using the comments under every post. The application uses [SoftUni's Practice Server](https://github.com/softuni-practice-server/softuni-practice-server) as a backend.
+**Carbon Footprint Tracker** is a web application (Single Page Application) using React.js i've made as a final project for [SoftUni's](https://softuni.bg/) ReactJS Course. The app is a basic tracking system that lets users track their carbon footprint via Logs(certain activity that leads to emissions) and connect to one another using the comments under every post. The application uses [SoftUni's Practice Server](https://github.com/softuni-practice-server/softuni-practice-server) as a backend.
 
 ## Application Structure
 The application consists of two parts - **Public** (Accessible without authentication) and **Private** (Available for Registered Users).
