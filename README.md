@@ -53,17 +53,15 @@ There are three custom hooks:
  ### Starting The Application
  The repository consists of two folders: **client** and **server**.
 
-1. To start the server you need to open a new terminal at the **server** folder and run the command:
+1. To start the server you need to open a new terminal at the **server** directory and run the command:
 
 ```console
-cd server
 node server.js
 ```
 
-2. To start the client you need to open a new terminal at the **client** folder and run the command:
+2. To start the client you need to open a new terminal at the **client** directory and run the command:
 
 ```console
-cd client
 npm start
 ```
  
