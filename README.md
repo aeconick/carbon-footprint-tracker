@@ -2,6 +2,7 @@
 
 **Carbon Footprint Tracker** is a web application (Single Page Application) using React.js i've made as a final project for [SoftUni's](https://softuni.bg/) ReactJS Course. The app is a basic tracking system that lets users track their carbon footprint via Logs(certain activity that leads to emissions) and connect to one another using the comments under every post. The application uses [SoftUni's Practice Server](https://github.com/softuni-practice-server/softuni-practice-server) as a backend.
 
+
 ## Application Structure
 The application consists of two parts - **Public** (Accessible without authentication) and **Private** (Available for Registered Users).
 
@@ -49,7 +50,6 @@ There are three custom hooks:
  - ***requester*** - assembles the **request** sent to the **server** based on method, url and data. Exports all **methods** needed in a form of an object.
 
 
-
  ### Starting The Application
  The repository consists of two folders: **client** and **server**.
 
@@ -65,5 +65,12 @@ node server.js
 npm start
 ```
  
- 
- 
+### App Preview
+![Home Page](https://drive.google.com/uc?export=view&id=1qWjsdwKZcbdc1_OtimemPqQk7wuBw4pl)
+![Register Page](https://drive.google.com/uc?export=view&id=1-NelyFvHw19qULz8GjNKTsBvVitKeTMG)
+![Create Page](https://drive.google.com/uc?export=view&id=1-gzHy9UdmRPFBhUvKNYoHuj208Q357Fo)
+![Personal Page](https://drive.google.com/uc?export=view&id=1eQWOrLef8cFggh8R6Q1MrJQD9wGCFWDJ)
+![Details Page](https://drive.google.com/uc?export=view&id=12TDEbtbOuxIuSD1mde8gd-1jmQ3ZTvOc)
+![Comment Page](https://drive.google.com/uc?export=view&id=1fxCIpQF2fYbg6GbSKg_w9zs7OJDweIDD)
+![Edit Page](https://drive.google.com/uc?export=view&id=1bjcOUW4EHY9fCPkdGSX4UqSSQMzY4SNi)
+![About Page](https://drive.google.com/uc?export=view&id=18BBb_lBV1i6f2uk9ozJeVuHx0a1aMyUe)
