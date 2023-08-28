@@ -6,7 +6,7 @@ export const About = () => {
 
         <div className="about-message">
             <h2>About us:</h2>
-            <p>Carbon Footprint Tracker is a web application (Single Page Application) using React.js i've made as a final project for SoftUni's ReactJS Course. The app is a basic tracking system that lets users track their carbon footprint via Logs(activity and emissions) and connect to one another using the comments under every post. The application uses SoftUni's Practice Server as a backend.</p>
+            <p>Carbon Footprint Tracker is a web application (Single Page Application) using React.js i've made as a final project for SoftUni's ReactJS Course. The app is a basic tracking system that lets users track their carbon footprint via Logs(activity and emissions) and connect to one another using the comments under every post.</p>
         </div>
         <img src="/images/about.png" alt="planet" />
 
